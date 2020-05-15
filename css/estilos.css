@@ -8,7 +8,7 @@
 body {
     background-image: url('../img/fundo.jpg');
     background-size: auto 100vh;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Source Code Pro', monospace;
     height: 100vh;
     font-size: 12px;
 }
@@ -32,6 +32,7 @@ header {
     position: fixed;
     width: 100vw;
     top: 0;
+    z-index: 1;
 }
 
 .menu ul {
@@ -44,7 +45,14 @@ header {
 }
 .menu a {
     display: block;
-    padding: 10px 10px ;
+    padding: 10px 10px;
+    transition: background-color, 2s, color, 1s;
+}
+
+.menu a:active,
+.menu a:hover {
+    background-color: teal;
+    color: white;
 }
 
 a {
@@ -56,17 +64,162 @@ a:hover {
     text-decoration: underline;
 }
 
+.titulo {
+    transform: scale(0.1) translateY(50vh);
+    opacity: 0;
+    animation: linear 1.5s animacaoTitulo forwards;
+}
+
+@keyframes animacaoTitulo {
+    from {
+        transform: scale(.1) translateY(50vh);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
 .site-subtitle,
 .site-title {
     color: whitesmoke;
     text-align: center;
 }
 
+.site-title {
+    font-size: 4em;
+    font-family: 'Caveat', cursive;
+    /*font-family: 'Source Code Pro', monospace;*/
+}
+
 .site-subtitle {
     font-style: italic;
+    font-family: 'Indie Flower', cursive;
+    line-height: 1.5em;
+}
+
+.sobre,
+.contato,
+.portfolio {
+    padding: 2em;
+    min-height: 100vh;
+}
+
+@media (min-width: 1200px){
+    container {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1200px;
+    }
+}
+
+.sobre h2,
+.contato h2,
+.portfolio h2 {
+    font-family: 'Indie Flower', cursive;
+    margin-bottom: 2em;
+    font-size: 3em;
+}
+
+.sobre p {
+    color: white;
+    margin-bottom: 1em;
+    text-indent: 2em;
+    text-align: justify;
+}
+
+.sobre .avatar {
+    float: right;
+    margin-left: 2em;
+}
+
+.sobre .avatar img {
+   clip-path: polygon(0% 0%, 100% 0%, 100% 61%, 75% 61%, 75% 85%, 52% 61%, 1% 61%);
+}
+
+@media (min-width: 560px) {
+    .sobre .avatar img {
+        clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+    }
+}
+
+.portfolio .grid {
+    display: grid;
+    gap: 3em;
+}
+
+@media (min-width:560px) {
+    .portfolio .grid {
+        grid-template-columns: 240px 240px;
+    }
+}
+
+@media (min-width:880px) {
+    .portfolio .grid {
+        grid-template-columns: 240px 240px 240px;
+        /*align-content: center;*/
+        justify-content: center;
+        /*height: calc(100vh - 4em - 48px);*/
+    }
+}
+
+.portfolio figure {
+    text-align: center;
 }
 
 .img-portfolio {
-    width: 180px;
-    height: 180px;
+    width: 240px;
+    height: 240px;
+    object-fit: fill;
+    transform: scale(1);
+    transition: transform, 300ms;
 }
+
+.flip-card {
+    perspective: 500px;
+}
+
+.card {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 2s;
+}
+
+.flip-card:hover .card{
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    top: 0;
+    left: 0;
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.card-back {
+    background-color: white;
+    height: 240px;
+    width: 100%;
+    transform: rotateY(180deg);
+    text-align: center;
+    font-size: 2em;
+}
+
+.contato .icons {
+    text-align: center;
+}
+
+.contato a {
+    color: black;
+    font-size: 5em;
+    transition:  text-shadow 1s;
+}
+
+.contato a:active,
+.contato a:hover {
+    text-decoration: none;
+    text-shadow: 0px 0px 10px whitesmoke;
+}
+
